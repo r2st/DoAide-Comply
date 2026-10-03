@@ -47,14 +47,41 @@ describe('Comply app', () => {
     expect(screen.getByTestId('plan-enterprise')).toHaveTextContent('₹1,499');
   });
 
-  it('lists blog posts', async () => {
+  it('lists blog posts including static articles', async () => {
     renderAt('/blog');
     expect(await screen.findByText('GST Due Dates')).toBeInTheDocument();
+    expect(screen.getByText(/Complete GST Compliance Calendar/)).toBeInTheDocument();
+  });
+
+  it('renders a static blog post directly without API', () => {
+    renderAt('/blog/gst-compliance-calendar-fy-2026-27');
+    expect(screen.getByRole('heading', { name: /Complete GST Compliance Calendar/ })).toBeInTheDocument();
+    expect(screen.getByText(/compliance calendar for Financial Year 2026-27 is packed/i)).toBeInTheDocument();
   });
 
   it('generates widget embed code', () => {
     renderAt('/widget');
     expect(screen.getByLabelText(/embed code/i).value).toContain('data-doaide-comply');
+  });
+
+  it('routes /embed to the widget page', () => {
+    renderAt('/embed');
+    expect(screen.getByLabelText(/embed code/i).value).toContain('data-doaide-comply');
+  });
+
+  it('routes to GST deadline checker', () => {
+    renderAt('/tools/gst-deadline-checker');
+    expect(screen.getByRole('heading', { name: /GST Deadline Checker/i })).toBeInTheDocument();
+  });
+
+  it('routes to TDS rate finder', () => {
+    renderAt('/tools/tds-rate-finder');
+    expect(screen.getByRole('heading', { name: /TDS Rate Finder/i })).toBeInTheDocument();
+  });
+
+  it('routes to compliance score quiz', () => {
+    renderAt('/tools/compliance-score');
+    expect(screen.getByRole('heading', { name: /Compliance Health Quiz/i })).toBeInTheDocument();
   });
 
   it('redirects dashboard to login when signed out', async () => {

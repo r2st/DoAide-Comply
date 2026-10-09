@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { api } from '../api.js';
 import CalendarList from '../components/CalendarList.jsx';
 import RobotFace from '../components/RobotFace.jsx';
@@ -95,9 +95,34 @@ export default function Home() {
         </section>
       )}
 
+      <FreeTools />
       <Testimonials />
       <FAQ />
     </div>
+  );
+}
+
+function FreeTools() {
+  const tools = [
+    { to: '/tools/gst-deadline-checker', name: 'GST Deadline Checker', desc: 'Check GSTR-1, GSTR-3B, GSTR-9 due dates for FY 2026-27' },
+    { to: '/tools/tds-rate-finder', name: 'TDS Rate Finder', desc: 'Look up TDS rates by section — 194A, 194C, 194J and more' },
+    { to: '/tools/compliance-score', name: 'Compliance Health Quiz', desc: 'Quick quiz to score your compliance readiness' },
+    { to: '/tools/roc-filing-tracker', name: 'ROC Filing Tracker', desc: 'Track AOC-4, MGT-7, DIR-3 KYC and all MCA deadlines' },
+  ];
+  return (
+    <section className="mt-16">
+      <h2 className="mb-6 text-center text-2xl font-bold text-white">
+        Free <span className="text-gold">Compliance Tools</span>
+      </h2>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {tools.map((t) => (
+          <Link key={t.to} to={t.to} className="card block transition-colors hover:border-gold/50">
+            <h3 className="font-semibold text-white">{t.name}</h3>
+            <p className="mt-1 text-sm text-zinc-400">{t.desc}</p>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }
 

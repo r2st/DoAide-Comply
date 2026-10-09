@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
+import FeedbackWidget from './components/FeedbackWidget.jsx';
 import Home from './pages/Home.jsx';
 import Pricing from './pages/Pricing.jsx';
 import { Blog, BlogPost } from './pages/Blog.jsx';
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<p>Page not found.</p>} />
       </Routes>
+      <FeedbackWidget />
     </Layout>
   );
 }

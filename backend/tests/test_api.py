@@ -2,6 +2,25 @@ def test_health(client):
     assert client.get("/api/health").json() == {"status": "ok"}
 
 
+def test_feedback_submit(client, tmp_path, monkeypatch):
+    import app.main as main_mod
+    fb_file = tmp_path / "feedback.json"
+    monkeypatch.setattr(main_mod, "FEEDBACK_FILE", fb_file)
+    r = client.post("/api/feedback", json={"type": "bug", "message": "Login broken"})
+    assert r.status_code == 201
+    assert r.json()["status"] == "received"
+    import json
+    data = json.loads(fb_file.read_text())
+    assert len(data) == 1 and data[0]["type"] == "bug" and data[0]["message"] == "Login broken"
+    client.post("/api/feedback", json={"type": "suggestion", "message": "Add dark mode"})
+    assert len(json.loads(fb_file.read_text())) == 2
+
+
+def test_feedback_validation(client):
+    assert client.post("/api/feedback", json={"type": "rant", "message": "hi"}).status_code == 422
+    assert client.post("/api/feedback", json={"type": "bug", "message": ""}).status_code == 422
+
+
 def test_meta(client):
     m = client.get("/api/public/meta").json()
     assert "pvt_ltd" in m["business_types"] and "Karnataka" in m["states"] and m["plans"]["pro"]["price_inr"] == 499

@@ -11,6 +11,8 @@ import GstDeadlineChecker from './pages/tools/GstDeadlineChecker.jsx';
 import TdsRateFinder from './pages/tools/TdsRateFinder.jsx';
 import ComplianceScore from './pages/tools/ComplianceScore.jsx';
 import RocFilingTracker from './pages/tools/RocFilingTracker.jsx';
+import ComplianceCalendar from './pages/tools/ComplianceCalendar.jsx';
+import IndustryChecklist from './pages/tools/IndustryChecklist.jsx';
 
 export default function App() {
   return (
@@ -26,6 +28,8 @@ export default function App() {
         <Route path="/tools/tds-rate-finder" element={<TdsRateFinder />} />
         <Route path="/tools/compliance-score" element={<ComplianceScore />} />
         <Route path="/tools/roc-filing-tracker" element={<RocFilingTracker />} />
+        <Route path="/tools/compliance-calendar" element={<ComplianceCalendar />} />
+        <Route path="/tools/industry-checklist" element={<IndustryChecklist />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />

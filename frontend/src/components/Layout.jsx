@@ -24,6 +24,8 @@ export default function Layout({ children }) {
                   <Link to="/tools/tds-rate-finder" className="block px-4 py-2 text-sm text-zinc-300 hover:bg-ink-3 hover:text-gold">TDS Rate Finder</Link>
                   <Link to="/tools/compliance-score" className="block px-4 py-2 text-sm text-zinc-300 hover:bg-ink-3 hover:text-gold">Compliance Health Quiz</Link>
                   <Link to="/tools/roc-filing-tracker" className="block px-4 py-2 text-sm text-zinc-300 hover:bg-ink-3 hover:text-gold">ROC Filing Tracker</Link>
+                  <Link to="/tools/compliance-calendar" className="block px-4 py-2 text-sm text-zinc-300 hover:bg-ink-3 hover:text-gold">Compliance Calendar</Link>
+                  <Link to="/tools/industry-checklist" className="block px-4 py-2 text-sm text-zinc-300 hover:bg-ink-3 hover:text-gold">Industry Checklist</Link>
                 </div>
               )}
             </div>

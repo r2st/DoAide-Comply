@@ -104,10 +104,12 @@ export default function Home() {
 
 function FreeTools() {
   const tools = [
+    { to: '/tools/compliance-calendar', name: 'Compliance Calendar', desc: 'All GST, TDS, ROC, PF/ESI, IT deadlines for FY 2026-27 in one view' },
     { to: '/tools/gst-deadline-checker', name: 'GST Deadline Checker', desc: 'Check GSTR-1, GSTR-3B, GSTR-9 due dates for FY 2026-27' },
     { to: '/tools/tds-rate-finder', name: 'TDS Rate Finder', desc: 'Look up TDS rates by section — 194A, 194C, 194J and more' },
     { to: '/tools/compliance-score', name: 'Compliance Health Quiz', desc: 'Quick quiz to score your compliance readiness' },
     { to: '/tools/roc-filing-tracker', name: 'ROC Filing Tracker', desc: 'Track AOC-4, MGT-7, DIR-3 KYC and all MCA deadlines' },
+    { to: '/tools/industry-checklist', name: 'Industry Checklist', desc: 'Manufacturing, IT, Retail, Healthcare compliance checklists' },
   ];
   return (
     <section className="mt-16">

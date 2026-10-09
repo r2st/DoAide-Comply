@@ -88,4 +88,24 @@ describe('Comply app', () => {
     renderAt('/dashboard');
     await waitFor(() => expect(screen.getByRole('heading', { name: /log in/i })).toBeInTheDocument());
   });
+
+  it('routes to compliance calendar', () => {
+    renderAt('/tools/compliance-calendar');
+    expect(screen.getByRole('heading', { name: /Compliance Calendar FY 2026-27/i })).toBeInTheDocument();
+  });
+
+  it('routes to industry checklist', () => {
+    renderAt('/tools/industry-checklist');
+    expect(screen.getByRole('heading', { name: /Industry Compliance Checklist/i })).toBeInTheDocument();
+  });
+
+  it('renders new blog posts in the static list', () => {
+    renderAt('/blog/compliance-checklist-new-company-india');
+    expect(screen.getByRole('heading', { name: /Ultimate Compliance Checklist for Newly Incorporated/i })).toBeInTheDocument();
+  });
+
+  it('renders MSME blog post', () => {
+    renderAt('/blog/msme-compliance-requirements-india');
+    expect(screen.getByRole('heading', { name: /MSME Compliance Requirements/i })).toBeInTheDocument();
+  });
 });

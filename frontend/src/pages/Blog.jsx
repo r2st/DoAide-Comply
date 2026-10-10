@@ -47,19 +47,38 @@ export function BlogPost() {
 
   useEffect(() => {
     if (!post) return;
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify({
+    const scripts = [];
+    const blogPosting = document.createElement('script');
+    blogPosting.type = 'application/ld+json';
+    blogPosting.textContent = JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': 'Article',
+      '@type': 'BlogPosting',
       headline: post.title,
       description: post.description,
       datePublished: post.published,
-      author: { '@type': 'Organization', name: 'DoAide Comply' },
+      dateModified: post.published,
+      author: { '@type': 'Organization', name: 'DoAide Comply', url: 'https://comply.doaide.com' },
       publisher: { '@type': 'Organization', name: 'DoAide Comply', url: 'https://comply.doaide.com' },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': `https://comply.doaide.com/blog/${post.slug}` },
     });
-    document.head.appendChild(script);
-    return () => { document.head.removeChild(script); };
+    document.head.appendChild(blogPosting);
+    scripts.push(blogPosting);
+    if (post.faqs && post.faqs.length > 0) {
+      const faqSchema = document.createElement('script');
+      faqSchema.type = 'application/ld+json';
+      faqSchema.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: post.faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: { '@type': 'Answer', text: faq.a },
+        })),
+      });
+      document.head.appendChild(faqSchema);
+      scripts.push(faqSchema);
+    }
+    return () => { scripts.forEach((s) => document.head.removeChild(s)); };
   }, [post]);
 
   if (missing) return <p>Post not found. <Link to="/blog" className="text-gold">Back to blog</Link></p>;
